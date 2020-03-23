@@ -1,4 +1,4 @@
-class CVVValidator {
+public class CVVValidator {
     private var textValidator:TextValidator
     
     public init(){
@@ -9,8 +9,8 @@ class CVVValidator {
         self.textValidator = textValidator
     }
     
-    func validate(cvv:CVV) -> ValidationResult {
-        guard !cvv.isEmpty else {
+    func validate(cvv:CVV?) -> ValidationResult {
+        guard let cvv = cvv, !cvv.isEmpty else {
             return ValidationResult(partial: true, complete: false)
         }
         
