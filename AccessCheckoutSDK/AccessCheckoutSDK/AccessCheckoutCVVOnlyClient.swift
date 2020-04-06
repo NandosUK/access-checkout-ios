@@ -5,7 +5,7 @@ public final class AccessCheckoutCVVOnlyClient {
     private var discovery: Discovery
     private var urlRequestFactory:CVVSessionURLRequestFactory
     private var restClient:RestClient
-    private let endPointToLookup: String = DiscoverLinks.sessions.endpoint
+    private let resourceToLookup:String = "sessions:session"
 
     public init(discovery: Discovery, merchantIdentifier: String) {
         self.discovery = discovery
@@ -22,7 +22,7 @@ public final class AccessCheckoutCVVOnlyClient {
     }
     
     fileprivate func extractSession(from response:AccessCheckoutResponse) -> String? {
-        return response.links.endpoints.mapValues({ $0.href })[self.endPointToLookup]
+        return response.links.endpoints.mapValues({ $0.href })[self.resourceToLookup]
     }
     
     public func createSession(cvv: CVV, urlSession: URLSession, completionHandler: @escaping (Result<String, AccessCheckoutClientError>) -> Void) {
